@@ -1,9 +1,11 @@
 import subprocess
 import json
+import os
+import glob
 
 def obtener_metadatos_subprocess(files, etiquetas):
     args = []
-    path =[]
+    path = []
     args.extend('-{}'.format(etiqueta) for etiqueta in etiquetas)
     path.extend('{}'.format(file) for file in files)
     comando = ["exiftool", *args, "-json", *files]
@@ -13,13 +15,21 @@ def obtener_metadatos_subprocess(files, etiquetas):
         print(f"Error al obtener metadatos para archivos.")
         return None
     salida_exiftool = resultado.stdout
-    metadata_list = json.loads(salida_exiftool)
-
+    metadata = json.loads(salida_exiftool)
     # Como acceder a la lista? acceso = metadata_list[registro]['atributo']
-    return metadata_list
+    return metadata
+
+def obtener_ubicaciones_glob(carpeta):
+    folder = carpeta
+    archivos_mp4 = glob.glob(os.path.join(folder, '*.mp4'))
+    # glob.glob() regresa una lista con directorios específicados, os.path.join() construye un directorio completo para archivos con el parámetro *.mp4
+    return archivos_mp4
 
 # Ejemplo de uso.
-archivos = [r"\ubicación\archivo1.mp4", r"\ubicación\archivo2.mp4"]
+#Se especifica la ruta de la carpeta
+archivos = obtener_ubicaciones_glob(r'C:\Users\063\Desktop\backupScripts\YoutubeSignIn\videos\hegel')
+#Se especifican las etiquetas
 etiquetas_deseadas = ['FileName', 'Duration', 'FileSize', 'ImageHeight', 'FileTypeExtension', 'FileCreateDate']
+
 # El método recibe 2 listas, una con las ubicaciones de los archivos y otra con las etiquetas a extraer de exiftool.
 salida_exiftool = obtener_metadatos_subprocess(archivos, etiquetas_deseadas)
