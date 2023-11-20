@@ -20,8 +20,7 @@ def obtener_metadatos_subprocess(files, etiquetas):
     return metadata
 
 def obtener_ubicaciones_glob(carpeta):
-    folder = carpeta
-    archivos_mp4 = glob.glob(os.path.join(folder, '*.mp4'))
+    archivos_mp4 = glob.glob(os.path.join(carpeta, '*.mp4'))
     # glob.glob() regresa una lista con directorios específicados, os.path.join() construye un directorio completo para archivos con el parámetro *.mp4
     return archivos_mp4
 
