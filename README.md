@@ -4,4 +4,3 @@ Bienvenido al Git del Backup del CID ✨
 - Corre el comando ``` pip install -r requirements.txt ``` para instalar las dependencias.
 - Instrucciones en construcción 🛠
 
-:)
