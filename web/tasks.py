@@ -1,6 +1,6 @@
-from locatorsPage import LocatorsPage
+from locators import Locators
 
-class Tasks(LocatorsPage):
+class Tasks(Locators):
 
     async def abrirPagina(self, url):
         super().open(url)
